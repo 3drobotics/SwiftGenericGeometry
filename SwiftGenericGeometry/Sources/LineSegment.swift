@@ -69,11 +69,11 @@ public extension LineSegmentType where Point.Scalar: FloatingPoint {
         let u = S1.second - S1.first
         let v = S2.second - S2.first
         let w = S1.first - S2.first
-        let D = perp(v,u)
+        let D = perp(u, v)
 
         // test if they are parallel (includes either being a point)
         if abs(D) < SMALL_NUM {           // S1 and S2 are parallel
-            if perp(w, u) != 0 || perp(v, w) != 0 {
+            if perp(u, w) != 0 || perp(v, w) != 0 {
                 return .disjoint                    // they are NOT collinear
             }
             // they are collinear or degenerate

@@ -49,7 +49,7 @@ public enum LineSegmentIntersection <LineSegment: LineSegmentType> {
 
 public extension LineSegmentType where Point.Scalar: FloatingPoint {
 
-    public func intersection(_ other: Self) -> Point? {
+    func intersection(_ other: Self) -> Point? {
         if case .intersect(let intersection) = advancedIntersection(other) {
             return intersection
         }

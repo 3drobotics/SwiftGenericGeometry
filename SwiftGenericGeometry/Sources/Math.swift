@@ -8,7 +8,7 @@
 
 import Darwin
 
-public protocol MathType: AbsoluteValuable {
+public protocol MathType: Comparable, SignedNumeric {
     static func sqrt(_ x: Self) -> Self
 }
 

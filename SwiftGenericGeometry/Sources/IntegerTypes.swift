@@ -14,6 +14,11 @@ public struct IntPoint: PointType {
         self.x = x
         self.y = y
     }
+    
+    public init() {
+        self.x = 0
+        self.y = 0
+    }
 }
 
 public func == (lhs: IntPoint, rhs: IntPoint) -> Bool {
@@ -26,6 +31,11 @@ public struct IntSize: SizeType {
     public var width: Int
     public var height: Int
 
+    public init() {
+        self.width = 0
+        self.height = 0
+    }
+    
     public init(width: Int, height: Int) {
         self.width = width
         self.height = height

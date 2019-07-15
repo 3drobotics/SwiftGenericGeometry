@@ -6,7 +6,7 @@
 //  Copyright © 2016 schwa.io. All rights reserved.
 //
 
-public protocol ScalarType: Comparable, SignedNumber {
+public protocol ScalarType: Comparable, SignedNumeric {
     static func + (lhs: Self, rhs: Self) -> Self
     static func - (lhs: Self, rhs: Self) -> Self
     static func * (lhs: Self, rhs: Self) -> Self

@@ -6,11 +6,11 @@
 //  Copyright © 2016 schwa.io. All rights reserved.
 //
 
-public protocol ScalarType: Comparable, SignedNumberType {
-    func + (lhs: Self, rhs: Self) -> Self
-    func - (lhs: Self, rhs: Self) -> Self
-    func * (lhs: Self, rhs: Self) -> Self
-    func / (lhs: Self, rhs: Self) -> Self
+public protocol ScalarType: Comparable, SignedNumeric {
+    static func + (lhs: Self, rhs: Self) -> Self
+    static func - (lhs: Self, rhs: Self) -> Self
+    static func * (lhs: Self, rhs: Self) -> Self
+    static func / (lhs: Self, rhs: Self) -> Self
 
     init(_ value: Int)
     init(_ value: Double)

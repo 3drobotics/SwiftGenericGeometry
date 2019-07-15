@@ -12,39 +12,60 @@ public protocol SizeType: Equatable {
     var width: Scalar { get set }
     var height: Scalar { get set }
 
-    init(width: Scalar, height: Scalar)
+    init()
 }
 
 // MARK: -
 
 public extension SizeType {
     static var zero: Self {
-        return self.init(width: Scalar(0), height: Scalar(0))
+        var size = self.init()
+        size.height = Scalar(0)
+        size.width = Scalar(0)
+        return size
     }
 }
 
 // MARK: -
 
 public func + <Size: SizeType> (lhs: Size, rhs: Size) -> Size {
-    return Size(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
+    var size = Size.init()
+    size.width = lhs.width + rhs.width
+    size.height = lhs.height + rhs.height
+    return size
 }
 
 public func - <Size: SizeType> (lhs: Size, rhs: Size) -> Size {
-    return Size(width: lhs.width - rhs.width, height: lhs.height - rhs.height)
+    var size = Size.init()
+    size.width = lhs.width - rhs.width
+    size.height = lhs.height - rhs.height
+    return size
 }
 
 public func * <Size: SizeType> (lhs: Size, rhs: Size) -> Size {
-    return Size(width: lhs.width * rhs.width, height: lhs.height * rhs.height)
+    var size = Size.init()
+    size.width = lhs.width * rhs.width
+    size.height = lhs.height * rhs.height
+    return size
 }
 
 public func / <Size: SizeType> (lhs: Size, rhs: Size) -> Size {
-    return Size(width: lhs.width / rhs.width, height: lhs.height / rhs.height)
+    var size = Size.init()
+    size.width = lhs.width / rhs.width
+    size.height = lhs.height / rhs.height
+    return size
 }
 
 public func * <Size: SizeType> (lhs: Size, rhs: Size.Scalar) -> Size {
-    return Size(width: lhs.width * rhs, height: lhs.height * rhs)
+    var size = Size.init()
+    size.width = lhs.width * rhs
+    size.height = lhs.height * rhs
+    return size
 }
 
 public func / <Size: SizeType> (lhs: Size, rhs: Size.Scalar) -> Size {
-    return Size(width: lhs.width / rhs, height: lhs.height / rhs)
+    var size = Size.init()
+    size.width = lhs.width / rhs
+    size.height = lhs.height / rhs
+    return size
 }

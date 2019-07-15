@@ -36,28 +36,41 @@ public extension RectType {
     }
 
     init(x: Point.Scalar, y: Point.Scalar, width: Size.Scalar, height: Size.Scalar) {
-        self.init(origin: Point(x: x, y: y), size: Size(width: width, height: height))
+        var point = Point.init()
+        point.x =  x
+        point.y =  y
+        var size = Size.init()
+        size.width = width
+        size.height = height
+        self.init(origin: point, size: size)
     }
 
     init(width: Size.Scalar, height: Size.Scalar) {
-        self.init(origin: Point.zero, size: Size(width: width, height: height))
+        var size = Size.init()
+        size.width = width
+        size.height = height
+        self.init(origin: Point.zero, size: size)
     }
 }
 
 // MARK: -
 
-public extension RectType where Point.Scalar == Size.Scalar, Size.Scalar: FloatingPointType {
+public extension RectType where Point.Scalar == Size.Scalar, Size.Scalar: FloatingPoint {
     init(center: Point, size: Size) {
         self.init(origin: center - size * Size.Scalar(0.5), size: size)
     }
 
     init(center: Point, diameter: Size.Scalar) {
-        let size = Size(width: diameter, height: diameter)
+        var size = Size.init()
+        size.width = diameter
+        size.height = diameter
         self.init(origin: center - size * Size.Scalar(0.5), size: size)
     }
 
     init(center: Point, radius: Size.Scalar) {
-        let size = Size(width: radius * Size.Scalar(2), height: radius * Size.Scalar(2))
+        var size = Size.init()
+        size.width = radius * Size.Scalar(2)
+        size.height = radius * Size.Scalar(2)
         self.init(origin: center - size * Size.Scalar(0.5), size: size)
     }
 }
@@ -72,12 +85,18 @@ public extension RectType {
 
 // MARK: -
 
-public extension RectType where Point.Scalar: FloatingPointType {
+public extension RectType where Point.Scalar: FloatingPoint {
     static var null: Self {
-        return self.init(origin: Point(x: Point.Scalar.infinity, y: Point.Scalar.infinity), size: Size.zero)
+        var point = Point.init()
+        point.x =  Point.Scalar.infinity
+        point.y =  Point.Scalar.infinity
+        return self.init(origin: point, size: Size.zero)
     }
     var isNull: Bool {
-        return origin == Point(x: Point.Scalar.infinity, y: Point.Scalar.infinity)
+        var point = Point.init()
+        point.x =  Point.Scalar.infinity
+        point.y =  Point.Scalar.infinity
+        return origin == point
     }
 }
 
@@ -102,23 +121,41 @@ public extension RectType where Point.Scalar == Size.Scalar {
     }
 
     init(minX: Point.Scalar, minY: Point.Scalar, maxX: Point.Scalar, maxY: Point.Scalar) {
-        self.init(origin: Point(x: minX, y: minY), size: Size(width: maxX - minX, height: maxY - minY))
+        var point = Point.init()
+        point.x =  minX
+        point.y =  minY
+        var size = Size.init()
+        size.width = maxX - minX
+        size.height = maxY - minY
+        self.init(origin: point, size: size)
     }
 
     var minXMinY: Point {
-        return Point(x: minX, y: minY)
+        var point = Point.init()
+        point.x =  minX
+        point.y =  minY
+        return point
     }
 
     var minXMaxY: Point {
-        return Point(x: minX, y: maxY)
+        var point = Point.init()
+        point.x =  minX
+        point.y =  maxY
+        return point
     }
 
     var maxXMinY: Point {
-        return Point(x: maxX, y: minY)
+        var point = Point.init()
+        point.x =  maxX
+        point.y =  minY
+        return point
     }
 
     var maxXMaxY: Point {
-        return Point(x: maxX, y: maxY)
+        var point = Point.init()
+        point.x =  maxX
+        point.y =  maxY
+        return point
     }
 }
 
@@ -136,7 +173,7 @@ public extension RectType where Point.Scalar == Size.Scalar, Point.Scalar: Compa
 
 // MARK: -
 
-public extension RectType where Point.Scalar == Size.Scalar, Point.Scalar: FloatingPointType {
+public extension RectType where Point.Scalar == Size.Scalar, Point.Scalar: FloatingPoint {
 
     var midX: Point.Scalar {
         return x + width * Point.Scalar(0.5)
@@ -147,15 +184,17 @@ public extension RectType where Point.Scalar == Size.Scalar, Point.Scalar: Float
     }
 
     var mid: Point {
-        return Point(x: midX, y: midY)
+        var point = Point.init()
+        point.x =  midX
+        point.y =  midY
+        return point
     }
 }
 
 // MARK: -
 
 public extension RectType where Point.Scalar == Size.Scalar {
-    @warn_unused_result
-    func union(point: Point) -> Self {
+    func union(_ point: Point) -> Self {
 //            let p1 = min(minXminY, point)
 //            let p2 = max(maxXmaxY, point)
 //            return Self(points: (p1, p2))
@@ -167,8 +206,7 @@ public extension RectType where Point.Scalar == Size.Scalar {
         return Self(minX: minX, minY: minY, maxX: maxX, maxY: maxY)
     }
 
-    @warn_unused_result
-    func union(rect: Self) -> Self {
+    func union(_ rect: Self) -> Self {
         let minX = min(self.minX, rect.minX)
         let minY = min(self.minY, rect.minY)
         let maxX = max(self.maxX, rect.maxX)
@@ -176,12 +214,11 @@ public extension RectType where Point.Scalar == Size.Scalar {
         return Self(minX: minX, minY: minY, maxX: maxX, maxY: maxY)
     }
 
-    @warn_unused_result
-    func inset(dx dx: Point.Scalar, dy: Point.Scalar) -> Self {
+    func inset(dx: Point.Scalar, dy: Point.Scalar) -> Self {
         return Self(minX: minX + dx, minY: minY + dy, maxX: maxX - dx, maxY: maxY - dy)
     }
 
-    mutating func insetInPlace(dx dx: Point.Scalar, dy: Point.Scalar) {
+    mutating func insetInPlace(dx: Point.Scalar, dy: Point.Scalar) {
         self = Self(minX: minX + dx, minY: minY + dy, maxX: maxX - dx, maxY: maxY - dy)
     }
 
@@ -189,9 +226,8 @@ public extension RectType where Point.Scalar == Size.Scalar {
 
 // MARK: -
 
-public extension RectType where Point.Scalar == Size.Scalar, Point.Scalar: FloatingPointType {
-    @warn_unused_result
-    func union(point: Point) -> Self {
+public extension RectType where Point.Scalar == Size.Scalar, Point.Scalar: FloatingPoint {
+    func union(_ point: Point) -> Self {
         if isNull {
             return Self(origin: point, size: Size.zero)
         }
@@ -208,8 +244,7 @@ public extension RectType where Point.Scalar == Size.Scalar, Point.Scalar: Float
         }
     }
 
-    @warn_unused_result
-    func union(rect: Self) -> Self {
+    func union(_ rect: Self) -> Self {
         if isNull {
             return rect
         }
@@ -226,8 +261,7 @@ public extension RectType where Point.Scalar == Size.Scalar, Point.Scalar: Float
 // MARK: -
 
 public extension RectType where Point.Scalar == Size.Scalar, Point.Scalar: Comparable {
-    @warn_unused_result
-    func contains(point: Point) -> Bool {
+    func contains(_ point: Point) -> Bool {
         let xInterval = minX ..< maxX
         let yInterval = minY ..< maxY
         return xInterval.contains(point.x) && yInterval.contains(point.y)
@@ -236,9 +270,8 @@ public extension RectType where Point.Scalar == Size.Scalar, Point.Scalar: Compa
 
 // MARK: -
 
-public extension SequenceType where Generator.Element: PointType, Generator.Element.Scalar: FloatingPointType {
-    @warn_unused_result
-    func boundingBox <Rect: RectType where Rect.Point == Generator.Element, Rect.Point.Scalar == Rect.Size.Scalar>() -> Rect {
+public extension Sequence where Iterator.Element: PointType, Iterator.Element.Scalar: FloatingPoint {
+    func boundingBox <Rect: RectType>() -> Rect where Rect.Point == Iterator.Element, Rect.Point.Scalar == Rect.Size.Scalar {
         return reduce(Rect.null) {
             (accumulator, element) in
             return accumulator.union(element)

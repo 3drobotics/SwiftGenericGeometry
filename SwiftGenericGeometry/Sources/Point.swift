@@ -11,88 +11,127 @@ public protocol PointType: Equatable {
 
     var x: Scalar { get set }
     var y: Scalar { get set }
-
-    init(x: Scalar, y: Scalar)
+    
+    init()
 }
 
 // MARK: -
 
 public extension PointType {
     static var zero: Self {
-        return self.init(x: Scalar(0), y: Scalar(0))
+        var point = self.init()
+        point.x =  Scalar(0)
+        point.y =  Scalar(0)
+        return point
     }
 }
 
 // MARK: -
 
 public prefix func - <Point: PointType> (other: Point) -> Point {
-    return Point(x: -other.x, y: -other.y)
+    var point = Point.init()
+    point.x =  -other.x
+    point.y =  -other.y
+    return point
 }
 
 // MARK: -
 
 public func + <Point: PointType> (lhs: Point, rhs: Point) -> Point {
-    return Point(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    var point = Point.init()
+    point.x =  lhs.x + rhs.x
+    point.y =  lhs.y + rhs.y
+    return point
 }
 
 public func - <Point: PointType> (lhs: Point, rhs: Point) -> Point {
-    return Point(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+    var point = Point.init()
+    point.x =  lhs.x - rhs.x
+    point.y =  lhs.y - rhs.y
+    return point
 }
 
 public func * <Point: PointType> (lhs: Point, rhs: Point) -> Point {
-    return Point(x: lhs.x * rhs.x, y: lhs.y * rhs.y)
+    var point = Point.init()
+    point.x =  lhs.x * rhs.x
+    point.y =  lhs.y * rhs.y
+    return point
 }
 
 public func / <Point: PointType> (lhs: Point, rhs: Point) -> Point {
-    return Point(x: lhs.x / rhs.x, y: lhs.y / rhs.y)
+    var point = Point.init()
+    point.x =  lhs.x / rhs.x
+    point.y =  lhs.y / rhs.y
+    return point
 }
 
 // MARK: -
 
 public func * <Point: PointType> (lhs: Point, rhs: Point.Scalar) -> Point {
-    return Point(x: lhs.x * rhs, y: lhs.y * rhs)
+    var point = Point.init()
+    point.x =  lhs.x * rhs
+    point.y =  lhs.y * rhs
+    return point
 }
 
 public func * <Point: PointType> (lhs: Point.Scalar, rhs: Point) -> Point {
-    return Point(x: lhs * rhs.x, y: lhs * rhs.y)
+    var point = Point.init()
+    point.x =  lhs * rhs.x
+    point.y =  lhs * rhs.y
+    return point
 }
 
 public func / <Point: PointType> (lhs: Point, rhs: Point.Scalar) -> Point {
-    return Point(x: lhs.x / rhs, y: lhs.y / rhs)
+    var point = Point.init()
+    point.x =  lhs.x / rhs
+    point.y =  lhs.y / rhs
+    return point
 }
 
 // MARK: -
 
-public func + <Point: PointType, Size: SizeType where Point.Scalar == Size.Scalar> (lhs: Point, rhs: Size) -> Point {
-    return Point(x: lhs.x + rhs.width, y: lhs.y + rhs.height)
+public func + <Point: PointType, Size: SizeType> (lhs: Point, rhs: Size) -> Point where Point.Scalar == Size.Scalar {
+    var point = Point.init()
+    point.x =  lhs.x + rhs.width
+    point.y =  lhs.y + rhs.height
+    return point
 }
 
-public func - <Point: PointType, Size: SizeType where Point.Scalar == Size.Scalar> (lhs: Point, rhs: Size) -> Point {
-    return Point(x: lhs.x - rhs.width, y: lhs.y - rhs.height)
-}
-
-// MARK: -
-
-public func min <Point: PointType where Point.Scalar: Comparable> (lhs: Point, _ rhs: Point) -> Point {
-    return Point(x: min(lhs.x, rhs.x), y: min(lhs.y, rhs.y))
-}
-
-public func max <Point: PointType where Point.Scalar: Comparable> (lhs: Point, _ rhs: Point) -> Point {
-    return Point(x: max(lhs.x, rhs.x), y: max(lhs.y, rhs.y))
+public func - <Point: PointType, Size: SizeType> (lhs: Point, rhs: Size) -> Point where Point.Scalar == Size.Scalar {
+    var point = Point.init()
+    point.x =  lhs.x - rhs.width
+    point.y =  lhs.y - rhs.height
+    return point
 }
 
 // MARK: -
 
-public func dotProduct <Point: PointType> (lhs: Point, _ rhs: Point) -> Point.Scalar {
+public func min <Point: PointType> (_ lhs: Point, _ rhs: Point) -> Point {
+    var point = Point.init()
+    point.x =  min(lhs.x, rhs.x)
+    point.y =  min(lhs.y, rhs.y)
+    return point
+}
+
+public func max <Point: PointType> (_ lhs: Point, _ rhs: Point) -> Point {
+    var point = Point.init()
+    point.x =  max(lhs.x, rhs.x)
+    point.y =  max(lhs.y, rhs.y)
+    return point
+}
+
+// MARK: -
+
+public func dotProduct <Point: PointType> (_ lhs: Point, _ rhs: Point) -> Point.Scalar {
     return lhs.x * rhs.x + lhs.y * rhs.y
 }
 
-public func crossProduct <Point: PointType> (lhs: Point, _ rhs: Point) -> Point.Scalar {
+public func crossProduct <Point: PointType> (_ lhs: Point, _ rhs: Point) -> Point.Scalar {
     return lhs.x * rhs.y - lhs.y * rhs.x
 }
 
 // TODO: Rename perpProduct?
-public func perp <Point: PointType> (lhs: Point, _ rhs: Point) -> Point.Scalar {
+public func perp <Point: PointType> (_ lhs: Point, _ rhs: Point) -> Point.Scalar {
     return lhs.x * rhs.y - lhs.y * rhs.x
 }
 
@@ -103,7 +142,7 @@ public extension PointType where Scalar: MathType {
         return sqrt(x * x + y * y)
     }
 
-    func distanceTo(other: Self) -> Scalar {
+    func distanceTo(_ other: Self) -> Scalar {
         return (self - other).magnitude
     }
 

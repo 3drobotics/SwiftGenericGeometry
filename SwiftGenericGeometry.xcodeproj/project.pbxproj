@@ -51,7 +51,7 @@
 /* Begin PBXFileReference section */
 		455BE97A1CAB361F005D17B2 /* SwiftGenericGeometry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftGenericGeometry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		455BE97D1CAB361F005D17B2 /* SwiftGenericGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftGenericGeometry.h; sourceTree = "<group>"; };
-		455BE97F1CAB361F005D17B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		455BE97F1CAB361F005D17B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../../Info.plist; sourceTree = "<group>"; };
 		456936711CAC427A0039A915 /* SwiftGenericGeometryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftGenericGeometryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		456936731CAC427A0039A915 /* IntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntTests.swift; sourceTree = "<group>"; };
 		456936751CAC427A0039A915 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,6 +102,7 @@
 		455BE9701CAB361F005D17B2 = {
 			isa = PBXGroup;
 			children = (
+				45A90CF41D0B7F0700612B18 /* Sources */,
 				45FBD9831CAB3664006C368B /* Playgrounds */,
 				455BE97C1CAB361F005D17B2 /* SwiftGenericGeometry */,
 				456936721CAC427A0039A915 /* Tests */,
@@ -124,9 +125,9 @@
 			children = (
 				455BE97D1CAB361F005D17B2 /* SwiftGenericGeometry.h */,
 				455BE97F1CAB361F005D17B2 /* Info.plist */,
-				45A90CF41D0B7F0700612B18 /* Sources */,
 			);
-			path = SwiftGenericGeometry;
+			name = SwiftGenericGeometry;
+			path = Sources/SwiftGenericGeometry;
 			sourceTree = "<group>";
 		};
 		456936721CAC427A0039A915 /* Tests */ = {
@@ -156,7 +157,8 @@
 				45A90CFF1D0B7F0700612B18 /* Size.swift */,
 				45A90D001D0B7F0700612B18 /* Transforms.swift */,
 			);
-			path = Sources;
+			name = Sources;
+			path = Sources/SwiftGenericGeometry;
 			sourceTree = "<group>";
 		};
 		45FBD9831CAB3664006C368B /* Playgrounds */ = {
@@ -560,7 +562,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftGenericGeometry/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.schwa.SwiftGenericGeometry;
@@ -581,7 +583,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftGenericGeometry/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.schwa.SwiftGenericGeometry;

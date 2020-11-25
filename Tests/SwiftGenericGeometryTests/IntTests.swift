@@ -10,7 +10,7 @@ import XCTest
 
 import SwiftGenericGeometry
 
-typealias Polygon = SwiftGenericGeometry.Polygon
+typealias Polygon = SwiftGenericGeometry.MapPolygon
 
 class IntTests: XCTestCase {
     
